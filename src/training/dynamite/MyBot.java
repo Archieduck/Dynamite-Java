@@ -49,7 +49,7 @@ public class MyBot implements Bot {
 
             if (lastRound.getP2() == lastRoundAgain.getP2()){  //if they play the same move twice, beat it
                 return beatTheirLastMove(lastRound.getP2());
-            } else if (dynamiteCount > 0 && chanceOfDynamite(dynamiteCount, dynamiteChance, gamestate)){ //plays my dynamite randomly
+            } else if (dynamiteCount > 1 && chanceOfDynamite(dynamiteCount, dynamiteChance, gamestate)){ //plays my dynamite randomly
                 dynamiteChance = 0;
                 dynamiteCount -= 1;
                 return Move.D;
@@ -59,7 +59,8 @@ public class MyBot implements Bot {
                 }else if (lastDrawOutcome != null && !sameAfterDraw){
                     return playTheirLastMove(lastDrawOutcome);
                 }
-                if (dynamiteCount > 0){
+                if (dynamiteCount > 1){
+                    dynamiteChance = 0;
                     dynamiteCount -= 1;
                     return Move.D;
                 } else {
@@ -70,7 +71,16 @@ public class MyBot implements Bot {
                 return beatTheirLastMove(lastRound.getP2());
             }
 
-        } else return Move.D;
+        } else {
+            if (dynamiteCount > 1){
+                dynamiteChance = 0;
+                return Move.D;
+            } else {
+                return getRandomMove();
+            }
+
+        }
+
 
     }
 
@@ -87,7 +97,8 @@ public class MyBot implements Bot {
             case S:
                 return Move.S;
             case D:
-                if (dynamiteCount > 0){
+                if (dynamiteCount > 1){
+                    dynamiteChance = 0;
                     dynamiteCount -= 1;
                     return Move.D;
                 } else {
@@ -128,7 +139,7 @@ public class MyBot implements Bot {
         }
         Random rand = new Random();
         int int_random = rand.nextInt(11);
-        if (dynamiteCount > 0) {
+        if (dynamiteCount > 1) {
             if (dynamiteChance >= int_random || dynamiteCount > (1000 - gamestate.getRounds().size())) {
                 return true;
             } else {
