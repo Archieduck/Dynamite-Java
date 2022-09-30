@@ -59,8 +59,13 @@ public class MyBot implements Bot {
                 }else if (lastDrawOutcome != null && !sameAfterDraw){
                     return playTheirLastMove(lastDrawOutcome);
                 }
-                dynamiteCount -= 1;
-                return Move.D;
+                if (dynamiteCount > 0){
+                    dynamiteCount -= 1;
+                    return Move.D;
+                } else {
+                    return getRandomMove();
+                }
+
             }else {
                 return beatTheirLastMove(lastRound.getP2());
             }
@@ -82,7 +87,12 @@ public class MyBot implements Bot {
             case S:
                 return Move.S;
             case D:
-                return Move.D;
+                if (dynamiteCount > 0){
+                    dynamiteCount -= 1;
+                    return Move.D;
+                } else {
+                    return Move.W;
+                }
             case W:
                 return Move.W;
             default:

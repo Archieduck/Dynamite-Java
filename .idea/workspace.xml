@@ -10,7 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="855644b9-333f-4662-8592-9ec97859d241" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/training/dynamite/MyBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/training/dynamite/MyBot.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -119,7 +118,8 @@
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "/Users/aduck1/Dynamite-Java",
     "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)"
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -193,7 +193,7 @@
       <option name="presentableId" value="Default" />
       <updated>1548267251649</updated>
       <workItem from="1548267253231" duration="7209000" />
-      <workItem from="1664527361077" duration="13788000" />
+      <workItem from="1664527361077" duration="14587000" />
     </task>
     <servers />
   </component>
