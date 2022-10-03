@@ -23,6 +23,7 @@ public class MyBot implements Bot {
         dynamiteCount = 98;
         theirDynamiteCount = 100;
         theirDynamiteChance = 1;
+        lastDrawOutcome = Move.R;
         System.out.println("Started new match");
     }
 
@@ -34,6 +35,12 @@ public class MyBot implements Bot {
             if (lastRound.getP2() == Move.D) {
                 movesSinceOppDynamite = 0;
                 theirDynamiteCount -= 1;
+                if (gamestate.getRounds().size() > 3) {
+                    Round lastRoundThree = (Round) gamestate.getRounds().get(gamestate.getRounds().size() - 3);
+                    if (lastRound.getP2().equals(lastRoundThree.getP2())) {
+                        return beatTheirLastMove(lastRound.getP2());
+                    }
+                }
             } else {
                 movesSinceOppDynamite += 1;
             }
@@ -87,9 +94,7 @@ public class MyBot implements Bot {
 
     }
 
-    //else if (chanceOfDynamite(theirDynamiteCount, movesSinceOppDynamite, gamestate)) {
-    //                    return Move.W;
-    //            }
+
 
     public Move playTheirLastMove(Move theirLastMove) {
         switch (theirLastMove) {
@@ -141,9 +146,9 @@ public class MyBot implements Bot {
             Move lastMove = lastRound.getP2();
         }
         Random rand = new Random();
-        int int_random = rand.nextInt(5);
+        int int_random = rand.nextInt(6);
         if (dynamiteCount > 1) {
-            if (dynamiteChance >= (4 * int_random) || dynamiteCount > (1000 - gamestate.getRounds().size())) {
+            if (dynamiteChance >= (3 * int_random) || dynamiteCount > (1000 - gamestate.getRounds().size())) {
                 return true;
             } else {
                 return false;
