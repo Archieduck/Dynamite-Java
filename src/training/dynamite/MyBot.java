@@ -8,10 +8,10 @@ import java.util.Random;
 
 public class MyBot implements Bot {
 
-    private int dynamiteCount = 99;
-    private int theirDynamiteCount = 100;
+    private int dynamiteCount;
+    private int theirDynamiteCount;
     private int dynamiteChance;
-    private int theirDynamiteChance = 1;
+    private int theirDynamiteChance;
     private List<Move> lastTen;
     private boolean sameAfterDraw;
     private Move lastDrawOutcome;
@@ -20,6 +20,9 @@ public class MyBot implements Bot {
     public MyBot() {
         // Are you debugging?
         // Put a breakpoint on the line below to see when we start a new match
+        dynamiteCount = 98;
+        theirDynamiteCount = 100;
+        theirDynamiteChance = 1;
         System.out.println("Started new match");
     }
 
@@ -102,10 +105,10 @@ public class MyBot implements Bot {
                     dynamiteCount -= 1;
                     return Move.D;
                 } else {
-                    return Move.W;
+                    return getRandomMove();
                 }
             case W:
-                return Move.W;
+                return getRandomMove();
             default:
                 throw new RuntimeException("Invalid last move from P111");
         }
@@ -138,9 +141,9 @@ public class MyBot implements Bot {
             Move lastMove = lastRound.getP2();
         }
         Random rand = new Random();
-        int int_random = rand.nextInt(11);
+        int int_random = rand.nextInt(5);
         if (dynamiteCount > 1) {
-            if (dynamiteChance >= int_random || dynamiteCount > (1000 - gamestate.getRounds().size())) {
+            if (dynamiteChance >= (4 * int_random) || dynamiteCount > (1000 - gamestate.getRounds().size())) {
                 return true;
             } else {
                 return false;
